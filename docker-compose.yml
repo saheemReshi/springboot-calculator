@@ -1,0 +1,32 @@
+services:
+  calculator:
+    build: .
+    image: calculator:local
+    environment:
+      SPRING_APPLICATION_NAME: calculator
+    networks:
+      - calculator-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "127.0.0.1:8081:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      calculator:
+        condition: service_healthy
+    networks:
+      - calculator-net
+    restart: unless-stopped
+
+networks:
+  calculator-net:
+    driver: bridge
