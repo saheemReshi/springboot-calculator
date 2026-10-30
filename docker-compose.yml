@@ -1,7 +1,7 @@
 services:
   calculator:
     build: .
-    image: calculator:local
+    image: "${CALCULATOR_IMAGE:-calculator:local}"
     environment:
       SPRING_APPLICATION_NAME: calculator
     networks:
