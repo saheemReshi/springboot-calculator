@@ -96,4 +96,4 @@ The pipeline sets `CALCULATOR_IMAGE` to the newly built image tag before startin
 | `pom.xml` | Maven dependencies and Java version |
 | `Dockerfile`, `.dockerignore` | Multi-stage image build and build-context exclusions |
 | `docker-compose.yml`, `nginx/default.conf` | Calculator, health check, network, and reverse proxy |
-| `Jenkinsfile` | Automated build, test, image push, deployment, and notifications |
+| `Jenkinsfile` | Automated build, test, image push, deployment with notifications |
